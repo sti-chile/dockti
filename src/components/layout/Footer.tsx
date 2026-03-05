@@ -96,18 +96,29 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2 text-sm">
               {[
-                { label: 'Nosotros', href: '/about' },
-                { label: 'DockTask (SaaS)', href: '/docktask' },
-                { label: 'Blog', href: '/blog' },
-                { label: 'Contacto', href: '/#contacto' },
+                { label: 'Nosotros', href: '/about', external: false },
+                { label: 'DockTask (SaaS)', href: 'https://docktask.app', external: true },
+                { label: 'Blog', href: '/blog', external: false },
+                { label: 'Contacto', href: '/#contacto', external: false },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
+                  {item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

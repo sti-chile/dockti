@@ -116,15 +116,17 @@ export default function Home() {
             especialmente para equipos chilenos. Planifica, organiza y entrega proyectos
             a tiempo — sin complejidad innecesaria.
           </p>
-          <Link
-            href="/docktask"
+          <a
+            href="https://docktask.app"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-900 font-semibold rounded-xl hover:bg-blue-50 transition-all duration-300 hover:shadow-xl"
           >
             Ver DockTask
             <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </a>
         </div>
       </section>
 

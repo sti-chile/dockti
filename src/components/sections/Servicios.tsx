@@ -7,7 +7,10 @@ import {
     CpuChipIcon,
     CloudArrowUpIcon,
     ShieldCheckIcon,
-    CogIcon
+    CogIcon,
+    SparklesIcon,
+    AcademicCapIcon,
+    CircleStackIcon
 } from '@heroicons/react/24/outline';
 
 const servicios = [
@@ -75,6 +78,39 @@ const servicios = [
             "Integración de Sistemas",
             "RPA",
             "Business Intelligence"
+        ]
+    },
+    {
+        icon: <SparklesIcon className="h-12 w-12" />,
+        title: "Agentes IA Especializados",
+        description: "Diseñamos e implementamos agentes de inteligencia artificial entrenados para tu negocio: soporte, ventas, análisis y más.",
+        features: [
+            "Agentes de Atención al Cliente",
+            "Asistentes de Ventas IA",
+            "Análisis Automático de Datos",
+            "Integración con tus Sistemas"
+        ]
+    },
+    {
+        icon: <AcademicCapIcon className="h-12 w-12" />,
+        title: "Entrenamiento de Modelos IA",
+        description: "Fine-tuning y entrenamiento de modelos de lenguaje con los datos propios de tu empresa para máxima precisión.",
+        features: [
+            "Fine-tuning LLM Personalizado",
+            "Modelos de Clasificación",
+            "Procesamiento de Documentos",
+            "RAG sobre Base de Conocimiento"
+        ]
+    },
+    {
+        icon: <CircleStackIcon className="h-12 w-12" />,
+        title: "Automatización de Datos",
+        description: "Pipelines de datos, ETL y dashboards que transforman tus datos en decisiones inteligentes.",
+        features: [
+            "Pipelines ETL Automatizados",
+            "Integración de Fuentes de Datos",
+            "Dashboards en Tiempo Real",
+            "Reportes Automáticos"
         ]
     }
 ];
