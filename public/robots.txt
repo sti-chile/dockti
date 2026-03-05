@@ -1,0 +1,17 @@
+# robots.txt — DockTI / STI Chile
+# https://dockti.cl
+
+User-agent: *
+Allow: /
+
+# Bloquear rutas de API internas y páginas de sistema
+Disallow: /api/
+Disallow: /_next/
+Disallow: /404
+Disallow: /500
+
+# Sitemap
+Sitemap: https://dockti.cl/sitemap.xml
+
+# Crawl-delay sugerido (opcional)
+Crawl-delay: 1
