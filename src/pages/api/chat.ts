@@ -1,12 +1,10 @@
-// pages/api/chat.ts
+// pages/api/chat.ts — powered by Google Gemini
 import type { NextApiRequest, NextApiResponse } from 'next';
-import OpenAI from 'openai';
+import { GoogleGenAI } from '@google/genai';
 import fs from 'fs';
 import path from 'path';
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY ?? '' });
 
 /**
  * Carga el contexto del chatbot desde los archivos de context_chat/.
@@ -31,7 +29,6 @@ function loadChatContext(): string {
             const content = fs.readFileSync(filePath, 'utf-8');
             sections.push(`## [${file}]\n${content}`);
         } catch {
-            // Si el archivo no existe, continuamos
             console.warn(`context_chat/${file} no encontrado, se omite.`);
         }
     }
@@ -39,7 +36,7 @@ function loadChatContext(): string {
     return sections.join('\n\n---\n\n');
 }
 
-// Cargamos el contexto una vez al inicializar el módulo (cache en memoria)
+// Contexto cacheado en memoria (se carga una sola vez por instancia)
 let cachedSystemPrompt: string | null = null;
 
 function getSystemPrompt(): string {
@@ -67,29 +64,34 @@ export default async function handler(
     }
 
     try {
-        const { message } = req.body;
+        const { message, history } = req.body;
 
         if (!message || typeof message !== 'string') {
             return res.status(400).json({ message: 'El campo message es requerido.' });
         }
 
-        const completion = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-                {
-                    role: "system",
-                    content: getSystemPrompt()
-                },
-                {
-                    role: "user",
-                    content: message
-                }
-            ],
+        // Historial de conversación (opcional, para contexto multi-turno)
+        const conversationHistory = Array.isArray(history) ? history : [];
+
+        const contents = [
+            ...conversationHistory,
+            { role: 'user', parts: [{ text: message }] },
+        ];
+
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.0-flash',
+            contents,
+            config: {
+                systemInstruction: getSystemPrompt(),
+                temperature: 0.7,
+                maxOutputTokens: 1024,
+            },
         });
 
-        res.status(200).json({ response: completion.choices[0].message.content });
+        const text = response.text ?? '';
+        res.status(200).json({ response: text });
     } catch (error) {
-        console.error('Error en chat API:', error);
+        console.error('Error en chat API (Gemini):', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 }
