@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banner Venti x DockTI</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 40px 20px; }
+
+  /* ── BANNER 1200×628 (Open Graph / Facebook) ── */
+  .banner-og {
+    width: 1200px; height: 628px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+    border-radius: 16px; overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 60px 80px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  }
+  .banner-og::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(59,130,246,0.15) 0%, transparent 70%);
+  }
+  .banner-og .left { position: relative; z-index: 2; max-width: 580px; }
+  .banner-og .tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.4);
+    color: #93c5fd; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .banner-og h1 { font-size: 52px; font-weight: 800; line-height: 1.1; color: #fff; margin-bottom: 20px; }
+  .banner-og h1 span { color: #3b82f6; }
+  .banner-og p { font-size: 20px; color: #94a3b8; line-height: 1.5; margin-bottom: 32px; }
+  .banner-og .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #3b82f6; color: #fff; font-size: 18px; font-weight: 700;
+    padding: 16px 32px; border-radius: 12px; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .banner-og .right { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .badge-main {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    border-radius: 24px; padding: 40px; text-align: center;
+    box-shadow: 0 10px 40px rgba(59,130,246,0.3); width: 340px;
+  }
+  .badge-main .icon { font-size: 56px; margin-bottom: 16px; }
+  .badge-main .amount { font-size: 42px; font-weight: 900; color: #fff; }
+  .badge-main .label { font-size: 16px; color: #93c5fd; margin-top: 4px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .pill {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: #e2e8f0; font-size: 14px; padding: 8px 16px; border-radius: 100px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .logos-row { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+  .logo-box {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 8px 18px; color: #fff; font-size: 15px; font-weight: 700;
+  }
+  .plus { color: #64748b; font-size: 20px; font-weight: 300; }
+
+  /* ── BANNER 1080×1080 (Instagram Square) ── */
+  .banner-sq {
+    width: 1080px; height: 1080px;
+    background: linear-gradient(160deg, #0f172a 0%, #1e3a5f 60%, #0c1e3a 100%);
+    border-radius: 16px; overflow: hidden; position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 80px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  .banner-sq::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(59,130,246,0.2) 0%, transparent 70%);
+  }
+  .banner-sq > * { position: relative; z-index: 2; }
+  .banner-sq .tag { margin-bottom: 32px; font-size: 15px; }
+  .banner-sq h1 { font-size: 72px; font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: 24px; }
+  .banner-sq h1 span { color: #3b82f6; }
+  .banner-sq p { font-size: 26px; color: #94a3b8; line-height: 1.5; margin-bottom: 48px; max-width: 800px; }
+  .cards-row { display: flex; gap: 24px; margin-bottom: 48px; }
+  .card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 32px 28px; text-align: center; flex: 1;
+  }
+  .card .emoji { font-size: 40px; margin-bottom: 12px; }
+  .card .val { font-size: 28px; font-weight: 800; color: #fff; }
+  .card .desc { font-size: 14px; color: #64748b; margin-top: 4px; }
+  .banner-sq .cta { font-size: 22px; padding: 20px 48px; border-radius: 14px; }
+  .banner-sq .logos-row { margin-top: 40px; }
+  .banner-sq .logo-box { font-size: 18px; padding: 10px 24px; }
+
+  /* ── BANNER 1080×1920 (Story) ── */
+  .banner-story {
+    width: 1080px; height: 1920px;
+    background: linear-gradient(180deg, #0f172a 0%, #1e3a5f 40%, #0f172a 100%);
+    border-radius: 16px; overflow: hidden; position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 100px 80px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    text-align: center; gap: 40px;
+  }
+  .banner-story::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 35%, rgba(59,130,246,0.25) 0%, transparent 60%);
+  }
+  .banner-story > * { position: relative; z-index: 2; }
+  .banner-story h1 { font-size: 80px; font-weight: 900; line-height: 1.1; color: #fff; }
+  .banner-story h1 span { color: #3b82f6; }
+  .banner-story p { font-size: 32px; color: #94a3b8; line-height: 1.5; max-width: 800px; }
+  .feature-list { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 800px; }
+  .feature {
+    display: flex; align-items: center; gap: 20px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 24px 32px; text-align: left;
+  }
+  .feature .icon { font-size: 36px; }
+  .feature .text .t { font-size: 22px; font-weight: 700; color: #fff; }
+  .feature .text .s { font-size: 18px; color: #64748b; }
+  .banner-story .cta { font-size: 26px; padding: 24px 60px; border-radius: 16px; width: 100%; max-width: 700px; justify-content: center; }
+
+  .label { font-size: 12px; color: #475569; text-align: center; margin-top: -16px; letter-spacing: 1px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<!-- BANNER 1: Facebook/LinkedIn/OG (1200×628) -->
+<div class="label">BANNER 1200×628 — Facebook / LinkedIn / Open Graph</div>
+<div class="banner-og">
+  <div class="left">
+    <div class="tag">🔗 Nueva integración disponible</div>
+    <h1>Tus clientes pagan en<br><span>cuotas con débito.</span><br>Tú cobras hoy.</h1>
+    <p>Integra Venti en tu plataforma y aumenta<br>tus ventas hasta un 40%. Ya lo hicimos<br>en salud — ahora lo hacemos para tu PyME.</p>
+    <a href="https://dockti.cl" class="cta">
+      <span>Quiero integrar Venti</span>
+      <span>→</span>
+    </a>
+  </div>
+  <div class="right">
+    <div class="badge-main">
+      <div class="icon">💳</div>
+      <div class="amount">3 cuotas</div>
+      <div class="label" style="color:#93c5fd;margin-top:6px;font-size:15px">sin interés con débito</div>
+    </div>
+    <div class="pills">
+      <div class="pill">✅ Pago 100% al instante</div>
+      <div class="pill">🔒 Sin riesgo de cobranza</div>
+      <div class="pill">⚡ Integración en 7 días</div>
+    </div>
+    <div class="logos-row">
+      <div class="logo-box">DockTI</div>
+      <div class="plus">×</div>
+      <div class="logo-box" style="background:rgba(16,185,129,0.2);border-color:rgba(16,185,129,0.4)">Venti</div>
+    </div>
+  </div>
+</div>
+
+<!-- BANNER 2: Instagram Square (1080×1080) -->
+<div class="label">BANNER 1080×1080 — Instagram / Facebook Feed</div>
+<div class="banner-sq">
+  <div class="tag">🔗 Nueva integración disponible</div>
+  <h1>¿Pierdes ventas porque<br>no ofreces <span>cuotas?</span></h1>
+  <p>Con Venti integrado por DockTI, tus clientes pagan en cuotas<br>con débito y tú recibes el 100% al instante.</p>
+  <div class="cards-row">
+    <div class="card">
+      <div class="emoji">💳</div>
+      <div class="val">3 cuotas</div>
+      <div class="desc">sin interés con débito</div>
+    </div>
+    <div class="card">
+      <div class="emoji">⚡</div>
+      <div class="val">7 días</div>
+      <div class="desc">integración express</div>
+    </div>
+    <div class="card">
+      <div class="emoji">🔒</div>
+      <div class="val">100%</div>
+      <div class="desc">cobro garantizado</div>
+    </div>
+  </div>
+  <a href="https://dockti.cl" class="cta">Solicita tu integración →</a>
+  <div class="logos-row">
+    <div class="logo-box">DockTI</div>
+    <div class="plus">×</div>
+    <div class="logo-box" style="background:rgba(16,185,129,0.2);border-color:rgba(16,185,129,0.4)">Venti</div>
+    <div class="logo-box" style="background:rgba(99,102,241,0.2);border-color:rgba(99,102,241,0.4)">+56 9 4946 9213</div>
+  </div>
+</div>
+
+<!-- BANNER 3: Instagram Story / TikTok (1080×1920) -->
+<div class="label">BANNER 1080×1920 — Instagram Story / TikTok</div>
+<div class="banner-story">
+  <div class="tag">💳 Integración de Pago</div>
+  <h1>Acepta pagos en<br><span>cuotas con débito</span><br>en tu negocio</h1>
+  <p>Integramos Venti en tu plataforma para que tus clientes paguen en cuotas mientras tú cobras al instante.</p>
+  <div class="feature-list">
+    <div class="feature">
+      <div class="icon">💳</div>
+      <div class="text">
+        <div class="t">Cuotas sin interés con débito</div>
+        <div class="s">El medio de pago favorito en Chile</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="icon">⚡</div>
+      <div class="text">
+        <div class="t">Cobras el 100% al instante</div>
+        <div class="s">Venti asume el riesgo de cobranza</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="icon">🚀</div>
+      <div class="text">
+        <div class="t">Integración en 7 días hábiles</div>
+        <div class="s">Compatible con cualquier plataforma web</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="icon">🏥</div>
+      <div class="text">
+        <div class="t">Ya funcionando en salud</div>
+        <div class="s">Consultas médicas online con Venti</div>
+      </div>
+    </div>
+  </div>
+  <a href="https://dockti.cl" class="cta">¡Quiero integrar Venti! →</a>
+  <div class="logos-row">
+    <div class="logo-box" style="font-size:20px;padding:12px 28px">DockTI</div>
+    <div class="plus" style="font-size:24px">×</div>
+    <div class="logo-box" style="background:rgba(16,185,129,0.2);border-color:rgba(16,185,129,0.4);font-size:20px;padding:12px 28px">Venti</div>
+  </div>
+</div>
+
+</body>
+</html>
